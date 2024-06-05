@@ -86,6 +86,12 @@ voice_assistant:
         green: 0%
         brightness: 100%
         effect: none
+  on_tts_end
+    - homeassistant.service:
+        service: media_player.voice_assistant_tts
+        media_content_id: !lamda 'return x;'
+        media_content_type: music
+        announce: "true"
   on_end:
     - delay: 100ms
     - wait_until:
