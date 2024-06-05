@@ -88,7 +88,7 @@ voice_assistant:
         effect: none
   on_tts_end
     - homeassistant.service:
-        service: media_player.voice_assistant_tts
+        service: media_player.play_media
         media_content_id: !lamda 'return x;'
         media_content_type: music
         announce: "true"
