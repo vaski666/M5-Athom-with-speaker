@@ -1,7 +1,12 @@
 ---
+substitutions:
+  name: m5cores3
+  friendly_name: M5CoreS3
+  external_media: media_player.voice_assistant_tts
+  mute_speaker: GPIO21  #GPIO22 will set sound back to speaker
 esphome:
-  name: m5stack-atom-echo
-  friendly_name: M5Stack Atom Echo
+  name: ${name}
+  friendly_name: ${friendly_name}
   name_add_mac_suffix: true
   project:
     name: m5stack.atom-echo-voice-assistant
@@ -52,7 +57,7 @@ microphone:
 speaker:
   - platform: i2s_audio
     id: echo_speaker
-    i2s_dout_pin: GPIO22
+    i2s_dout_pin: ${mute_speaker}
     dac_type: external
     mode: mono
 
@@ -90,7 +95,7 @@ voice_assistant:
     - homeassistant.service:
         service: media_player.play_media
         data:
-          entity_id: media_player.voice_assistant_tts
+          entity_id: ${external_media}
           media_content_id: !lambda 'return x;'
           media_content_type: music
           announce: "true"
